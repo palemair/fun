@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 
-TEST = "145"
-a = 16
-b = 8
-
-def filter(x : int):
+def num(x : int):
 
     if x>64:
         u=x-55
@@ -15,7 +11,7 @@ def filter(x : int):
 def val_from_string(text : str, base : int=10 ):
 
     ret = 0
-    raw = [filter(ord(x)) for x in TEST]
+    raw = [num(ord(x)) for x in text]
     raw.reverse()
 
     for index,nb in enumerate(raw):
@@ -23,6 +19,22 @@ def val_from_string(text : str, base : int=10 ):
 
     return ret
 
-x = val_from_string(TEST, 8)
+def val_to_string(val : int, b : int):
+   
+    CHAR = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    ret = ""
+    q=1
+    while(q>0):
+        q,r= val//b,val%b
+        ret += CHAR[r]
+        val=q
+    return ret[::-1]
 
-print(x,type(x))
+def changement_de_base(rep_a, a, b):
+    
+    val = val_from_string(rep_a,a)
+    print(val)
+    ret = val_to_string(val,b)
+    print(ret)
+
+changement_de_base('10',10,2)
